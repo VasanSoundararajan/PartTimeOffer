@@ -127,7 +127,7 @@ function validateStudent() {
 
     if (age < 18) {
         errorMsg.textContent = "Only candidates above 18 are eligible!";
-        window.location.href = "Employee.html"
+        
         return;
     }
 
@@ -138,6 +138,7 @@ function validateStudent() {
 
     errorMsg.textContent = "";
     alert("Registration Successful!");
+    window.location.href = "Employee.html";
 }
 </script>
 
