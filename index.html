@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant Web App</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff9966, #ff5e62);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 350px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: #ff5e62;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ff9966;
+}
+
+.link {
+    text-align: center;
+    margin-top: 10px;
+    cursor: pointer;
+    color: #ff5e62;
+}
+
+.hidden {
+    display: none;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Main Login Page -->
+<div class="container" id="mainLogin">
+    <h2>Restaurant Login</h2>
+    <button onclick="showStudent()">Student Login</button><br><br>
+    <button onclick="showEmployee()">Admin Login</button>
+</div>
+
+<!-- Student Registration Page -->
+<div class="container hidden" id="studentPage">
+    <h2>Student Registration</h2>
+    <input type="text" placeholder="Name" required>
+    <input type="email" placeholder="Email" required>
+    <input type="tel" placeholder="Phone Number" required>
+    <input type="number" id="age" placeholder="Age (Above 18)" min="18" required>
+    <input type="password" id="password" placeholder="Create Password" required>
+    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+    <div class="error" id="errorMsg"></div>
+    <button onclick="validateStudent()">Register</button>
+    <div class="link" onclick="goBack()">⬅ Back</div>
+</div>
+
+<!-- Employee Login Page -->
+<div class="container hidden" id="employeePage">
+    <h2>Employee Login</h2>
+    <input type="text" placeholder="Employee ID" required>
+    <input type="password" placeholder="Password" required>
+    <button>Login</button>
+    <div class="link" onclick="goBack()">⬅ Back</div>
+</div>
+
+<script>
+function showStudent() {
+    document.getElementById("mainLogin").classList.add("hidden");
+    document.getElementById("studentPage").classList.remove("hidden");
+}
+
+function showEmployee() {
+    document.getElementById("mainLogin").classList.add("hidden");
+    document.getElementById("employeePage").classList.remove("hidden");
+}
+
+function goBack() {
+    document.getElementById("studentPage").classList.add("hidden");
+    document.getElementById("employeePage").classList.add("hidden");
+    document.getElementById("mainLogin").classList.remove("hidden");
+}
+
+function validateStudent() {
+    let age = document.getElementById("age").value;
+    let password = document.getElementById("password").value;
+    let confirmPassword = document.getElementById("confirmPassword").value;
+    let errorMsg = document.getElementById("errorMsg");
+
+    if (age < 18) {
+        errorMsg.textContent = "Only candidates above 18 are eligible!";
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        errorMsg.textContent = "Passwords do not match!";
+        return;
+    }
+
+    errorMsg.textContent = "";
+    alert("Registration Successful!");
+}
+</script>
+
+</body>
+</html>
