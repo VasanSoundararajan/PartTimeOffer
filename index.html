@@ -1,145 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Restaurant Web App</title>
+    <title>Post a Part-Time Job</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            padding: 40px;
+        }
 
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ff9966, #ff5e62);
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
 
-.container {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    width: 350px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
+        h2 {
+            text-align: center;
+        }
 
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 16px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
 
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-button {
-    width: 100%;
-    padding: 10px;
-    background: #ff5e62;
-    border: none;
-    color: white;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-}
+        button:hover {
+            background: #0056b3;
+        }
 
-button:hover {
-    background: #ff9966;
-}
+        .job-card {
+            margin-top: 25px;
+            padding: 15px;
+            background: #eef3ff;
+            border-left: 5px solid #007bff;
+            border-radius: 5px;
+        }
 
-.link {
-    text-align: center;
-    margin-top: 10px;
-    cursor: pointer;
-    color: #ff5e62;
-}
-
-.hidden {
-    display: none;
-}
-
-.error {
-    color: red;
-    font-size: 14px;
-}
-</style>
+        .job-card h3 {
+            margin: 0;
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- Main Login Page -->
-<div class="container" id="mainLogin">
-    <h2>Restaurant Login</h2>
-    <button onclick="showStudent()">Student Login</button><br><br>
-    <button onclick="showEmployee()">Admin Login</button>
-</div>
+<div class="container">
+    <h2>Post a Part-Time Job</h2>
 
-<!-- Student Registration Page -->
-<div class="container hidden" id="studentPage">
-    <h2>Student Registration</h2>
-    <input type="text" placeholder="Name" required>
-    <input type="email" placeholder="Email" required>
-    <input type="tel" placeholder="Phone Number" required>
-    <input type="number" id="age" placeholder="Age (Above 18)" min="18" required>
-    <input type="password" id="password" placeholder="Create Password" required>
-    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-    <div class="error" id="errorMsg"></div>
-    <button onclick="validateStudent()">Register</button>
-    <div class="link" onclick="goBack()">⬅ Back</div>
-</div>
+    <input type="text" id="title" placeholder="Job Title" required>
 
-<!-- Employee Login Page -->
-<div class="container hidden" id="employeePage">
-    <h2>Employee Login</h2>
-    <input type="text" placeholder="Employee ID" required>
-    <input type="password" placeholder="Password" required>
-    <button>Login</button>
-    <div class="link" onclick="goBack()">⬅ Back</div>
+    <textarea id="description" rows="4" placeholder="Job Description (JD)" required></textarea>
+
+    <input type="text" id="contact" placeholder="Contact Details (Email/Phone)" required>
+
+    <input type="text" id="location" placeholder="Job Location" required>
+
+    <button onclick="postJob()">Post Job</button>
+
+    <div id="jobList"></div>
 </div>
 
 <script>
-function showStudent() {
-    document.getElementById("mainLogin").classList.add("hidden");
-    document.getElementById("studentPage").classList.remove("hidden");
-}
+    function postJob() {
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+        const contact = document.getElementById("contact").value;
+        const location = document.getElementById("location").value;
 
-function showEmployee() {
-    document.getElementById("mainLogin").classList.add("hidden");
-    document.getElementById("employeePage").classList.remove("hidden");
-}
+        if (!title || !description || !contact || !location) {
+            alert("Please fill all fields.");
+            return;
+        }
 
-function goBack() {
-    document.getElementById("studentPage").classList.add("hidden");
-    document.getElementById("employeePage").classList.add("hidden");
-    document.getElementById("mainLogin").classList.remove("hidden");
-}
+        const jobCard = document.createElement("div");
+        jobCard.className = "job-card";
+        jobCard.innerHTML = `
+            <h3>${title}</h3>
+            <p><strong>Description:</strong> ${description}</p>
+            <p><strong>Location:</strong> ${location}</p>
+            <p><strong>Contact:</strong> ${contact}</p>
+        `;
 
-function validateStudent() {
-    let age = document.getElementById("age").value;
-    let password = document.getElementById("password").value;
-    let confirmPassword = document.getElementById("confirmPassword").value;
-    let errorMsg = document.getElementById("errorMsg");
+        document.getElementById("jobList").appendChild(jobCard);
 
-    if (age < 18) {
-        errorMsg.textContent = "Only candidates above 18 are eligible!";
-        
-        return;
+        document.getElementById("title").value = "";
+        document.getElementById("description").value = "";
+        document.getElementById("contact").value = "";
+        document.getElementById("location").value = "";
     }
-
-    if (password !== confirmPassword) {
-        errorMsg.textContent = "Passwords do not match!";
-        return;
-    }
-
-    errorMsg.textContent = "";
-    alert("Registration Successful!");
-    window.location.href = "Employee.html";
-}
 </script>
 
 </body>
