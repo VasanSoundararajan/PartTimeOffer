@@ -1,0 +1,100 @@
+<<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Enrollment Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #74ebd5, #ACB6E5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: white;
+            width: 350px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .details {
+            text-align: left;
+            margin: 15px 0;
+        }
+
+        .details p {
+            margin: 6px 0;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Hide checkbox */
+        #interestToggle {
+            display: none;
+        }
+
+        /* Notification message */
+        .notification {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #28a745;
+            border-radius: 5px;
+            display: none;
+            font-weight: bold;
+        }
+
+        /* Show message when checkbox checked */
+        #interestToggle:checked ~ .notification {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Student Details</h2>
+
+        <div class="details">
+            <p><strong>Name:</strong> Meharaj</p>
+            <p><strong>Course:</strong> Full Stack Development</p>
+            <p><strong>Duration:</strong> 3 Months</p>
+            <p><strong>Fees:</strong> ₹10,000</p>
+        </div>
+
+        <!-- Hidden checkbox -->
+        <input type="checkbox" id="interestToggle">
+
+        <!-- Label as button -->
+        <label for="interestToggle" class="btn">Interested</label>
+
+        <!-- Payment Received Notification -->
+        <div class="notification">
+            ✅ Payment Received Successfully!
+        </div>
+
+    </div>
+
+</body>
+</html>
